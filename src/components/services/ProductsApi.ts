@@ -1,32 +1,14 @@
 import { IOrderPayload, IOrderResponse, IProductsResponse } from "../../types";
-import { Api } from "../base/Api";
+import type { IApi } from "../../types";
 
 export default class ProductsApi {
-  constructor(private readonly api: Api) {}
+  constructor(private readonly api: IApi) {}
 
   async getProducts(): Promise<IProductsResponse> {
-    try {
-      const response = await this.api.get<IProductsResponse>("/product");
-      return response;
-    } catch (error) {
-      console.error(error);
-      return {
-        items: [],
-        total: 0,
-      };
-    }
+    return await this.api.get<IProductsResponse>("/product");
   }
 
   async createOrder(order: IOrderPayload): Promise<IOrderResponse> {
-    try {
-      const response = await this.api.post<IOrderResponse>("/orders", order);
-      return response;
-    } catch (error) {
-      console.error(error);
-      return {
-        id: "",
-        total: 0,
-      };
-    }
+    return await this.api.post<IOrderResponse>("/orders", order);
   }
 }
