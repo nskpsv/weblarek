@@ -1,21 +1,24 @@
 import type { IProduct } from "../../types";
 
 export default class Products {
-  constructor(
-    protected products: IProduct[] = [],
-    protected selectedProduct: IProduct | null = null,
-  ) {}
+  protected products: IProduct[];
+  protected selectedProduct: IProduct | null;
+
+  constructor() {
+    this.selectedProduct = null;
+    this.products = [];
+  }
 
   saveProductsList(products: IProduct[]): void {
-    this.products = JSON.parse(JSON.stringify(products));
+    this.products = products;
   }
 
   getProductsList(): IProduct[] {
-    return JSON.parse(JSON.stringify(this.products));
+    return this.products;
   }
 
-  getProduct(): IProduct[] {
-    return this.products;
+  getProduct(productId: IProduct["id"]): IProduct | null {
+    return this.products.find((product) => product.id === productId) ?? null;
   }
 
   setSelectedProduct(product: IProduct): void {
