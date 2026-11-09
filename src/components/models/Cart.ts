@@ -1,22 +1,18 @@
 import type { IProduct } from "../../types";
 
 export default class Cart {
-  constructor(protected list: IProduct[] = []) {}
+  protected list: IProduct[];
 
-  add(item: IProduct): number {
-    return this.list.push(item);
+  constructor() {
+    this.list = [];
   }
 
-  remove(item: IProduct): number {
-    const index = this.list.indexOf(item);
+  add(product: IProduct): void {
+    this.list.push(product);
+  }
 
-    if (index == -1) {
-      console.error(`Item: ${item.id} not found in cart`);
-    } else {
-      this.list.splice(index, 1);
-    }
-
-    return this.list.length;
+  remove(product: IProduct): void {
+    this.list = this.list.filter((item) => item.id !== product.id);
   }
 
   clear(): void {
