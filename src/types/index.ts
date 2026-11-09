@@ -30,11 +30,10 @@ export interface IProductsResponse {
   items: IProduct[];
 }
 
-export type IOrderPayload = Omit<ICustomer, "payment"> & {
-  payment: PaymentMethods; // на сервер нельзя отправить ""
+export interface IOrderPayload extends ICustomer {
   total: number;
-  items: IProduct["id"][];
-};
+  items: string[];
+}
 
 export interface IOrderResponse {
   id: string;
