@@ -17,8 +17,8 @@ export default class Products {
     return this.products;
   }
 
-  getProduct(productId: IProduct["id"]): IProduct | null {
-    return this.products.find((product) => product.id === productId) ?? null;
+  getProduct(productId: IProduct["id"]): IProduct | undefined {
+    return this.products.find((product) => product.id === productId);
   }
 
   setSelectedProduct(product: IProduct): void {
