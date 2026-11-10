@@ -14,10 +14,21 @@ export default class Customer {
   }
 
   saveCustomerData(data: Partial<ICustomer>): void {
-    this.payment = data.payment ?? this.payment;
-    this.address = data.address ?? this.address;
-    this.email = data.email ?? this.email;
-    this.phone = data.phone ?? this.phone;
+    if (data.address !== undefined) {
+      this.address = data.address;
+    }
+
+    if (data.email !== undefined) {
+      this.email = data.email;
+    }
+
+    if (data.payment !== undefined) {
+      this.payment = data.payment;
+    }
+
+    if (data.phone !== undefined) {
+      this.phone = data.phone;
+    }
   }
 
   getCustomerData(): ICustomer {
@@ -49,8 +60,6 @@ export default class Customer {
 
     if (!this.email) {
       errors.email = "Необходимо указать email";
-    } else if (!/^\S+@\S+\.\S+$/.test(this.email)) {
-      errors.email = "Введите валидный email";
     }
 
     if (!this.phone) {
